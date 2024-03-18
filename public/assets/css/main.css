@@ -1,25 +1,16 @@
 div {
-  border: 1px red dotted;
-}
-
-header {
-  border: 1px red dotted;
+  /* border: 1px red dotted; */
 }
 
 main {
-  border: 1px red dotted;
+  /* border: 1px red dotted; */
 }
-
-footer {
-  border: 1px red dotted;
-}
-
 
 body {
   margin: 0px;
-  min-height: 92vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
@@ -30,9 +21,116 @@ main {
 
 .sidenav {
   background-color: #FAFAFA;
+  overflow-y: auto;
+  max-height: 100vh;
+  min-width: 33vh;
 }
 
-.container{
-  background-color: #FFFFFF;
+.menu {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-list li {
+  padding: 10px 0;
+}
+
+.menu-list li ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-list li ul li {
+  padding: 5px 0 5px 0px;
+}
+
+.menu-list a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.logo {
+  min-height: 8vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.container {
+
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  min-height: 81vh;
+
+  max-height: 99vh;
+  position: relative;
+}
+
+header {
+  /* border: 1px red dotted; */
+  min-height: 8vh;
+  position: sticky;
+  top: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  display: flex;
+}
+footer {
+  border: 1px red dotted;
+  min-height: 8vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.content {
+  min-height: 81vh;
+  flex: 1;
+  padding: 100px 200px 200px 200px;
+  box-sizing: border-box;
+}
+
+.code-block {
+  background-color: black;
+  padding: 10px;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+.code-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.code-text {
+  white-space: pre-wrap;
+}
+
+.quote-block {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin: 20px;
+  border-color: black;
+  border: solid 2px;
+}
+
+.quote-text {
+  font-size: 1.2em;
+  font-style: italic;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.quote-source {
+  font-size: 0.9em;
+  color: #666;
+  text-align: right;
 }
