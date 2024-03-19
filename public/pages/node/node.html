@@ -1,1 +1,49 @@
-<h1>Introduction to Node</h1>
+<h1>NodeJS 101</h1>
+<p>
+  NodeJS er en JavaScript runtime, som vi bruger til at eksekvere vores JavaScript kode et andet sted end i
+  browseren. Browseren har en JavaScript motor kaldet V8(der findes også andre), som er udviklet af Google.Det
+  er denne motor der oversætter JavaScript koden til maskinkode.<br /><br />
+  Udvikleren af NodeJS har taget V8 motoren og sørget for at vi kan køre det andre steder end i browseren.
+  Derudover tillader NodeJs også at vores programmer snakker sammen med vores computer, så vi fx har adgang
+  til filer på computeren, samt netværk og HTTP funktionalitet.
+</p>
+
+<div class="quote-block">
+  <div class="quote-text">
+    Node.js is an open-source and cross-platform JavaScript runtime environment. It is a popular tool for
+    almost any kind of project! <br /><br />Node.js runs the V8 JavaScript engine, the core of Google Chrome,
+    outside of the browser. This allows Node.js to be very performant. <br /><br />A Node.js app runs in a
+    single process, without creating a new thread for every request. Node.js provides a set of asynchronous
+    I/O primitives in its standard library that prevent JavaScript code from blocking and generally, libraries
+    in Node.js are written using non-blocking paradigms, making blocking behavior the exception rather than
+    the norm.
+  </div>
+  <div class="quote-source">Source: https://nodejs.org/en/learn/getting-started/introduction-to-nodejs</div>
+</div>
+
+<p>
+  NodeJS er især god til at bygge serverbaserede applikationer da det er bygget med fokus på asynkron,
+  ikke-blokerende kode. Det betyder dog også, at hvis ens program skal lave mange beregninger, så er det ikke
+  ideelt. En anden fordel, som blandt andet gør at jeg har dykket ned i NodeJS er, at det tillader at man kan
+  bygge en frontend og backend i samme sprog, hvilket tillader hurtig udvikling. <br /><br />Netflix er en
+  virksomhed som er kendt for at bruge NodeJS.
+</p>
+
+<div class="quote-block">
+  <div class="quote-text">
+    The primary reason is to use a similar language on both the server side and the browser side that Node.js
+    has in terms of performance. Node has a large number of modules, most of which are free source, and they
+    reduced their startup time from 40 minutes or more to under a minute, to create a single-page application.
+  </div>
+  <div class="quote-source">Source: https://www.bellcorpstudio.com/blog/how-netflix-is-using-node-js</div>
+</div>
+
+<p>På nuværende tidspunkt bruger jeg Node version 20.11.0</p>
+
+<div class="code-block">
+  <div class="code-title">Hvordan man ser ens version af node i kommandolinjen</div>
+  <div class="code-text">
+1    $ node --version
+2    v20.11.0
+  </div>
+</div>
