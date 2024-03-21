@@ -42,8 +42,88 @@
 
 <div class="code-block">
   <div class="code-title">Hvordan man ser ens version af node i kommandolinjen</div>
+  <div class="code-text">1 $ node --version 2 v20.11.0</div>
+</div>
+
+<h2>Node Package Manager</h2>
+
+<p>
+  Node har en package manager, som den bruger til at holde styr på programmets afhængigheder. Standard package
+  manageren er “Node Package Manager”, men der findes også andre værktøjer, som fx Yarn, som er udviklet af
+  Facebook.
+  <br /><br />
+  Node Package Manager tillader at man som udvikler kan installere og opdatere software fra andre biblioteker,
+  som man dernæst kan bruge i sit eget program - og det giver os derfor også mulighed for at bruge udvalgte
+  versioner af ekstern software. På den måde kan Node Package Manger sammenlignes med Maven eller Gradle
+  indenfor Java verdenen.
+  <br /><br />
+  Måden hvorpå det fungerer ved at man definerer sit programs afhængigheder i filen kaldet “package.json”,
+  hvorefter man kører kommandolinjen “npm install”. Eksempler på denne kommandolinje og en package.json fil
+  kan ses nedenfor.
+</p>
+
+<div class="code-block">
+  <div class="code-title">Installering af package.json filer</div>
+  <div class="code-text">1 npm install</div>
+</div>
+
+<div class="code-block">
+  <div class="code-title">Package.json</div>
   <div class="code-text">
-1    $ node --version
-2    v20.11.0
+    {
+      "type": "module",
+      "dependencies": {
+        "@faker-js/faker": "8.4.1",
+        "express": "^4.18.3"
+      },
+      "scripts": {
+        "dev": "nodemon --ext html,js, json app.js"
+      }
+    }
+    
   </div>
 </div>
+
+<h2>Scripts(ext)</h2>
+<p>
+  Udover at sørge for vores programs afhængigheder så kan Node Package Manager også bruges til at køre scripts og kommandoer i et projekt. Det gør at vi kan automatisere en række af vores opgaver hvis vi fx vil starte et udviklingsmiljø op, eller køre tests. 
+  <br><br>
+  Ovenfor ses det hvordan vi har defineret et script kaldet “dev” i vores package.json fil. Den sørger for at nodemon lytter efter ændringer i filerne html, js og json, og dernæst genkører projektet ved ændringer i disse fil typer.
+</p>
+
+<div class="code-block">
+  <div class="code-title">Sådan kører man et script via Node Package Manager  </div>
+  <div class="code-text">
+npm run dev
+  </div>
+</div>
+
+<p>Når man installerer afhængigheder via Node Package Manager så bliver de downloadet og gemt i mappen kaldet “node_modules”. Dernæst kan vi importerer funktionaliteten i det downloadede materiale til vores eget program ved at importere det.
+  <br><br>
+  Der er to måder at importere det på, som kan ses nedenfor, og det har at gøre med hvilket modul-system man gør brug af.
+  <br><br>
+  CommonJS har funktionaliteten “require()”.
+  <br><br>
+  ECMAScript fra 2015 og frem har funktionaliteten “import”.
+  <br><br>
+  Vi definerer i vores package.json hvilken en vi vil gøre brug af.
+</p>
+
+<h2>Indlæsning af filer</h2>
+<p>Som beskrevet ovenfor har NodeJS også mulighed for at hente filer på ens eget system. Nednefor kan man se et stykke kode der viser hvordan vi gør brug af dette.</p>
+
+<div class="code-block">
+  <div class="code-title">Importering af fil</div>
+  <div class="code-text">
+import fs from "fs";
+
+const header = fs.readFileSync("./public/components/header/header.html").toString();
+    
+  </div>
+</div>
+
+
+
+
+
+

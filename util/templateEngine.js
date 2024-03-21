@@ -11,7 +11,7 @@ export function renderPage(page, config = {}) {
 
   return (
     header
-      .replace("$TAB_TITLES$", config.tabTitle ?? "Steffen")
+      .replace("$TAB_TITLES$", config.tabTitle ?? "NodeJS by Steffen")
       .replace("$CSS_LINKS$", config.CSSLinks ?? "") +
     page +
     footer
