@@ -1,1 +1,98 @@
 <h1>Express</h1>
+<p>Express er et framework til NodeJS, som tillader os at bygge fleksible og hurtige programmer i NodeJS. Det er designet til at være let at bruge, og det har et stort og aktivt fællesskab af udviklere, som konstant bidrager med opdateringer.
+</p>
+
+<div class="quote-block">
+  <div class="quote-text">Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.</div>
+  <div class="quote-source">Source: https://expressjs.com/</div>
+</div>
+
+<p>Det er et minimalistisk framework forstået på den måde at der ikke er mange indbyggede funktionaliteter i det, men at man selv skal stå for denne del. Eksempelvis har Express en Router, men den har ikke funktionalitet til Authentication, hvilket man selv skal bygge eller importere fra andre biblioteker.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på at installere Express</div>
+  <div class="code-text">npm install express
+  </div>
+</div>
+
+<p>Eller tilføj det til package.json filen og kør følgende...</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på at installere Express</div>
+  <div class="code-text">npm install</div>
+</div>
+
+<p>Grundlæggende set er skabelonen til vores Express program det følgende.</p>
+
+<div class="code-block">
+  <div class="code-title">Skabelon på app.js</div>
+  <div class="code-text">
+import express from "express";
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send({data: “Hello World”});
+});
+
+const PORT = 8080;
+app.listen(PORT, () => console.log("Server is running on port", PORT));
+
+  </div>
+</div>
+
+<p>Dernæst kan vi køre applikationen med:</p>
+
+<div class="code-block">
+  <div class="code-title">Kør applikatoinen</div>
+  <div class="code-text">node app.js</div>
+</div>
+
+<h2>Express Router</h2>
+<p>Som beskrevet før har Express en Router, som tillader os at organisere og strukturere vores router definitioner. Dette projekt gør blandt andet brug af Routeren. Nedenfor kan vi se et eksempel af den specifikke kode, der tillader dette.</p>
+<p>Først importeres Router fra “express” og dernæst sætter vi forskellige routes via router.get og til sidst gøres denne klar til eksport. Den bliver senere hen importeret i vores app.js, hvor vi beder app’en om at gøre brug af denne router.</p>
+
+<div class="code-block">
+  <div class="code-title">pagesRouter.js</div>
+  <div class="code-text">
+import { Router } from "express";
+import { homepagePage, nodePage } from "../util/readPages.js"
+const router = Router();
+
+router.get("/", (req, res) => {
+  res.send(homepagePage);
+});
+
+router.get("/node", (req, res) => {
+  res.send(nodePage);
+})
+
+export default router;
+
+  </div>
+</div>
+
+<div class="code-block">
+  <div class="code-title">app.js</div>
+  <div class="code-text">
+import express from "express";
+
+const app = express();
+    
+app.use(express.static("public"));
+    
+import pagesRouter from "./routers/pagesRouter.js";
+
+app.use(pagesRouter);
+    
+const PORT = 8080;
+app.listen(PORT, () => console.log("Server is running on port", PORT));
+    
+  </div>
+</div>
+
+
+<div class="quote-block">
+  <div class="quote-text">Lorem ipsum</div>
+  <div class="quote-source">Source: www.wikipedia.com</div>
+</div>
