@@ -1,5 +1,12 @@
 import { Router } from "express";
-import { homepagePage, nodePage, expressPage, javascriptPage, restPage, toolsPage } from "../util/readPages.js";
+import {
+  homepagePage,
+  nodePage,
+  expressPage,
+  javascriptPage,
+  restPage,
+  toolsPage,
+} from "../util/readPages.js";
 const router = Router();
 
 router.get("/", (req, res) => {

@@ -1,1 +1,453 @@
 <h1>JavaScript</h1>
+
+<h2>Variabler</h2>
+<p>I JavaScript kan vi definere variabler på fire forskellige måder.</p>
+
+<ol>
+  <li>Total global variable</li>
+  <li>Var global variable</li>
+  <li>Let</li>
+  <li>Const</li>
+</ol>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på Total Global Variable</div>
+  <div class="code-text">
+totalGlobalVariable = 1;
+  </div>
+</div>
+
+<p>Den totale globale variable defineres uden nogen deklaration foran. Det vil sige var, let eller const. Så bliver variablen automatisk en global variable, og det gør, at den bliver tilgængelig på tværs af hele vores JavaScript applikation. Det anbefales ikke at bruge denne metode, da det hurtigt kan føre til fejl.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på var Global Variable</div>
+  <div class="code-text">
+var globalVariable = 1;
+  </div>
+</div>
+
+<p>Det ovenstående er en mere eksplicit måde at deklarere en global variabel på. Det er en mere tydelig måde at definere en global variabel, men det er fortsat ikke anbefalet.</p>
+
+
+<div class="code-block">
+  <div class="code-title">Eksempel på let variable</div>
+  <div class="code-text">
+let variable = “Steffen”;
+  </div>
+</div>
+
+<p>Det ovenstående er en metode til at deklarere en variabel på i et blok-omfang (block scope). Det betyder at variablen kun kan tilgås inden for det område, som den er defineret.  Variabler defineret med let kan ændre værdi i løbet af programmets levetid.</p>
+
+
+<div class="code-block">
+  <div class="code-title">Eksempel på const variable</div>
+  <div class="code-text">
+const variable = "Steffen";
+  </div>
+</div>
+
+<p>Det ovenstående er en anden metode til at deklarere en variabel på. Hvad angår scope, så er det det samme som ved let. Men forskellen er, at const ikke kan ændre værdi fremadrettet. Man kan godt tilføje noget til fx et objekt, men ikke simple datatyper.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på forskellen mellem let og const</div>
+  <div class="code-text">
+
+let isTrue = false;
+isTrue = true;
+console.log(isTrue); // Vil printe true
+
+const isFalse = true;
+isFalse = false; // Vil fejle
+console.log(isFalse);
+
+const me = {name: “Steffen”}
+me.age = 32;
+
+console.log(me); // Vil printe både navn og alder
+  </div>
+</div>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på fejl</div>
+  <div class="code-text">
+$ node test.js
+true
+file:///C:/Users/steff/Documents/GitHub/node-mandatory-1/test.js:6
+isFalse = false;
+         ^
+    
+TypeError: Assignment to constant variable.
+    at file:///C:/Users/steff/Documents/GitHub/node-mandatory-1/test.js:6:9
+    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)
+    at async loadESM (node:internal/process/esm_loader:28:7)
+    at async handleMainPromise (node:internal/modules/run_main:113:12)    
+  </div>
+</div>
+
+<h2>Scoping</h2>
+<p>Som vi kort var inde på i det tidligere afsnit vedrørende variabler, så er der et koncept der hedder Scopes, som er meget vigtigt at forstå.</p>
+<p>Scopes definerer i bund og grund strukturen for programmet og styrer tilgængeligheden af vores variabler i koden. Det er vigtigt at forstå sine scopes, således at vi undgår fejl og konflikter.</p>
+<p>Der findes tre typer af scopes:</p>
+
+<ol>
+  <li>Global scope</li>
+  <li>Function scope</li>
+  <li>Block scope</li>
+</ol>
+
+<h3>Global scope</h3>
+<p>Variabler der deklareres udenfor enhver funktion eller blok har et global scope, som betyder, at de er tilgængelige fra enhver del af programmet. Det sker eksempelvis når man laver implisitte eller eksplisitte globale variabler.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på Global scope</div>
+  <div class="code-text">
+// Variabel deklareret i det globale scope
+var globalVariable = 10;
+
+function exampleFunction() {
+    // Tilgår variabeln i det globale scope inden for en funktion
+    console.log(globalVariable); // Output: 10
+}
+
+exampleFunction(); // Kald til funktionen
+  </div>
+</div>
+
+<h3>Function scope</h3>
+<p>Variabler der deklareres inden for en funktion er scopet til denne funktion, og er derfor kun synlige for denne funktion, og ikke udenfor. Det sker for eksempel når vi opretter variabler med let eller const inde i en funktion.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på Function scope</div>
+  <div class="code-text">
+function exampleFunction() {
+     // Variabel deklareret inden for funktionens omfang
+     const functionVariable = 20;
+     console.log(functionVariable); // Output: 20
+}
+
+exampleFunction(); // Kald til funktionen
+//console.log(functionVariable); // Dette vil føre til en referencefejl, da 'functionVariable' er deklareret inden for funktionsområdet
+  </div>
+</div>
+
+<h3>Block scope</h3>
+<p>Variabler der er deklareret indenfor en block har et block scope og er kun synlige inde for denne block. Et eksempel på dette kunne være nedenstående const foo, som er deklareret indenfor et if statement. Det vil ikke være muligt at tilgå dette uden for if-blokken.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på block scope</div>
+  <div class="code-text">
+if (true) {
+  const foo = "foo";
+  console.log(foo); // "foo"
+}
+  </div>
+</div>
+
+<p>Variabler der er deklareret med “var” kan “polute” udenfor block scope, som det ses nedenfor.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på pollution</div>
+  <div class="code-text">
+{
+  var someValue = true;
+
+  {
+    var someValue = false;
+  }
+
+  //console.log(someValue); // Will print out false, because var variables pollutes
+}
+  </div>
+</div>
+
+<p>Et andet eksempel på dette er i nedenstående. Her ser vi et loop, hvor variablen i er deklareret med en var. På grund af var pollution, så vil der bliver printet 5 ud 6 gange.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på pollution</div>
+  <div class="code-text">
+    // Will print out 6 six times
+    for (var i = 0; i <= 5; i++) {
+      setTimeout(() => {
+        console.log(i);
+      }, 1000);
+    }
+    
+    // Will print out 0 1 2 3 4 5
+    for (let i = 0; i <= 5; i++) {
+      setTimeout(() => {
+        console.log(i);
+      }, 1000);
+    }
+    
+  </div>
+</div>
+
+<h2>Type coercion</h2>
+<p>I Javascript findes der noget der hedder Type coercion, som er selve processen med at konvertere værdien af en variabel om fra én datatype til en anden datatypen. Det sker automatisk i Javascript, og det er vigtigt at være opmærksom på, da det kan føre til uforudsete fejl i sin kode.</p>
+<p>I det nedenstående ser vi et eksempel på to variabler,  hvor den ene er et Number og den anden er en String. Når man forsøger at addere disse to sammen, så vil Javascript konvertere x til en streng dernæst sammensætte de to strenge og derfor producere 510 som resultat frem for 15.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på type coercien</div>
+  <div class="code-text">
+    let x = 5;
+    let y = "10";
+    let result = x + y; // Her vil 'x' blive konverteret til en streng
+    console.log(result); // Output: "510"
+  </div>
+</div>
+
+<h2>Loop methods</h2>
+<p>I Javascript har vi en række forskellige loop metoder, som tillader programmet at løbe igennem en række af elementer i en liste eller array, og dernæst udføre en handling på disse.</p>
+
+<p>Her er en række af loop metoder:</p>
+<ol>
+  <li>For loop</li>
+  <li>forEach</li>
+  <li>Map</li>
+  <li>Filter</li>
+  <li>Sort</li>
+  <li>Find</li>
+  <li>Reduce</li>
+</ol>
+
+<h3>For loop</h3>
+<p>Et for loop er et traditionelt loop, som giver os mulighed for at udføre en handling x antal gange. Det kunne for eksempel være på baseret på længden af arrayet. Det kan være godt at bruge hvis vi ved vi skal stoppe efter x iterationer eller skal tælle noget op.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på brug af for loop</div>
+  <div class="code-text">
+const students = [{ name: "Steffen" }, { name: "Mathias" }, { name: "Jacob" }, { name: "Morten" }];
+
+for (let i = 0; i < students.length; i++) {
+    console.log(students[i].name);
+}
+  </div>
+</div>
+
+<h2>forEach</h2>
+<p>For each er en metode der er tilgængelige på arrays, og som itererer igennem alle elementer i arrayet og udfører en specifik handling på hvert element. Det kan være smart at bruge hvis man gerne vil påføre en ændring på elementerne uden at lave et nyt array.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på forEach</div>
+  <div class="code-text">
+const students = [{ name: "Steffen" }, { name: "Mathias" }, { name: "Jacob" }, { name: "Morten" }];
+
+students.forEach((student) => {
+    console.log(student.name);
+});
+  </div>
+</div>
+
+<h2>Map</h2>
+<p>Map metoden itererer også igennem hvert element og udfører en specifik handling på hvert element. Dog returnerer denne metode et nyt array, og det oprindelige array er ikke berørt eller ændret.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på map metoden</div>
+  <div class="code-text">
+const students = [{ name: "Steffen" }, { name: "Mathias" }, { name: "Jacob" }, { name: "Morten" }];
+
+const studentsWithGrade = students.map((student) => {
+    return {
+        name: student.name,
+        grade: 12
+    };
+});
+  </div>
+</div>
+
+<h2>Filter</h2>
+<p>Filter metoden itererer igennem hvert element, men udfører ikke en specifik handling på elementet. Den kigger på om elementet opfylder en given betingelse, og tager så dette element over i et nyt array, hvis det fylder op til det, og returnere dette. Det anvendes derfor for at filtrere i et array.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på filter metoden</div>
+  <div class="code-text">
+const students = [{ name: "Steffen" }, { name: "Mathias" }, { name: "Jacob" }, { name: "Steffen" }];
+
+const steffenStudents = students.filter((student) => student.name === "Steffen");
+  </div>
+</div>
+
+<h2>Sort</h2>
+<p>Sort metoden sorterer et arrays elementer i faldende eller stigende rækkefølge baseret på en given betingelse. Handlingen udføres på det pågældende array.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på sort</div>
+  <div class="code-text">
+ const students = [{ name: "Steffen" }, { name: "Mathias" }, { name: "Jacob" }, { name: "Morten" }];
+
+students.sort((a, b) => {
+    if (a.name < b.name) return -1; // Hvis navnet på a kommer før b i alfabetisk rækkefølge
+    if (a.name > b.name) return 1;  // Hvis navnet på a kommer efter b i alfabetisk rækkefølge
+    return 0; // Hvis navnene er ens
+});
+  </div>
+</div>
+
+<h2>Find</h2>
+<p>Find metoden kigger listen igennem indtil den finder et element der opfylder en given betingelse. Når den falder over sådan et element, så returnere den det element. Den returnere kun ét element, nemlig det første den finder.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på find</div>
+  <div class="code-text">
+    const students = [{ name: "Steffen" }, { name: "Mathias" }, { name: "Jacob" }, { name: "Morten" }];
+
+    const steffenStudent = students.find((student) => student.name === "Steffen");    
+  </div>
+</div>
+
+<h2>Reduce</h2>
+<p>Metoden reduce bliver brugt til at reducere en værdi på tværs af elementer i et array ned til én værdi - eksempelvis en akkumuleret sum af værdierne.</p>
+
+<div class="code-block">
+  <div class="code-title"> Eksempel på reduce, der tæller antallet af elever</div>
+  <div class="code-text">
+    const students = [{ name: "Steffen" }, { name: "Mathias" }, { name: "Jacob" }, { name: "Morten" }];
+
+    const totalStudents = students.reduce((accumulator, student) => {
+        return accumulator + 1;
+    }, 0);    
+  </div>
+</div>
+
+<h2>Side effects</h2>
+<p>Det er vigtigt at skrive kode, som agerer på en forudsigelige måde, og derfor kan det være en udfordring at have kode der kan introducere såkaldte side effects.</p>
+<p>Side effects opstår, når en metode berører variabler, som ligger uden for den pågældende metode. Det kan nemt ske ved et for loop, som vi ser nedenfor. Men det kan ikke ske med de mere declarative, funktionelle array funktioner.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på side effects med et for loop</div>
+  <div class="code-text">
+    let numbers = [1, 2, 3, 4, 5];
+
+    for (let i = 0; i < numbers.length; i++) {
+        numbers[i] = numbers[i] * 2; // Ændrer værdien af hvert element i arrayet ved at multiplicere det med 2
+    }    
+  </div>
+</div>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på ingen side effect med map-metoden</div>
+  <div class="code-text">
+let numbers = [1, 2, 3, 4, 5];
+
+let doubledNumbers = numbers.map(number => number * 2); // Opretter et nyt array med hver værdi i numbers-arrayet multipliceret med 2
+
+console.log(doubledNumbers); // Output: [2, 4, 6, 8, 10]
+console.log(numbers); // Output: [1, 2, 3, 4, 5] (Det originale array forbliver uændret)
+
+console.log(numbers); // Output: [2, 4, 6, 8, 10]
+
+  </div>
+</div>
+
+<h2>Fetch</h2>
+<p>Fetch er en metode som vi kan bruge til at lave HTTP anmodninger mod en server. Fx ved at hente data ned i form af JSON. Metodne arbejder asynkront og kræver derfor at man venter på at dataen loades færdig, hvorefter man kan vise dataen.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på fetch</div>
+  <div class="code-text">
+  fetch('https://kea.com/students)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Fejl ved hentning af data:'));
+  </div>
+</div>
+
+<h2>Asynkron kode</h2>
+<p>Javascript er et single trådet sprog, hvilket betyder, at vi bliver nødt til at designe applikationen rigtigt for at sikre, at programmet ikke bliver blokeret og ikke længere kan tage imod requests. Men vi kan godt arbejde på en asynkron måde påtrods af dette da der er mange af dets funktioner og API’er der kan arbejde i baggrunden.</p>
+<p>Helt konkret kan vi gøre dette ved at gøre brug af callbacks, promises og async/await. Derfor kan vi arbjede mere flere ting på én gang uden at blokere hovedtråden.</p>
+
+<h3>Callbacks</h3>
+<p>En callback-funktion er betyder i alt sin enkelthed, at en funktion modtager en anden funktion som parameter, som senere kan eksekveres. For eksempel kan vi callback funktion så sende data tilbage når dette bliver til rådighed for vores funktion.</p>
+<p>Én af udfordringerne ved at skrive asynkron kode via callbacks er at man kan ende i Callback hell - eller pyramid of doom - hvor man ofte har mange nestede callback funktioner i samme træ. Det kan hurtigt blive uoverskueligt at læse og derfor har man forsøgt at løse dette.</p>
+
+<div class="code-block">
+  <div class="code-title">Eksempel på Callback</div>
+  <div class="code-text">
+    asyncOperation1(function(result1) {
+      asyncOperation2(result1, function(result2) {
+          asyncOperation3(result2, function(result3) {
+              asyncOperation4(result3, function(result4) {
+                  // Og så videre...
+                  asyncOperation5(result4, function(result5) {
+                      // Og her kommer resultatet
+                      console.log("Resultat:", result5);
+                  });R
+              });
+          });
+      });
+  });
+  </div>
+</div>
+
+<h3>Promises</h3>
+<p>For at imødekomme den komplicerede kode ved callback hell lavede man promises, som er en måde at skrive kode på der struktureret og læsevenligt. En promise er en værdi, som kan være tilgængelig allerede nu, måske senere eller slet ikke. Det er er så en metode at få fat på værdien, som man ikke ved om eksistere, uden at gøre brug af callbacks.
+</p>
+
+
+<div class="code-block">
+  <div class="code-title">Eksempel på en funktion der returnere en promise</div>
+  <div class="code-text">
+    function myPromise() {
+      const value = true;
+    
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // use try catch instead
+          if (value) {
+            resolve("Value is true");
+          } else {
+            reject("Value is false");
+          }
+        }, 2000);
+      });
+    }    
+  </div>
+</div>
+
+
+<div class="code-block">
+  <div class="code-title">Eksempel på hvordan man får værdien via et promise</div>
+  <div class="code-text">
+myPromise(value)
+  .then((successMessage) => console.log(successMessage))
+  .catch((failMessage) => console.log(failMessage));
+  </div>
+</div>
+
+<h3>Async/Await</h3>
+<p>Async / await er en anden måde at skrive asynkron kode på, som minder mere om den traditionelle tilgang, som man kender fra andre systemer.</p>
+<p>Når man beskriver at en metode er async, så betyder det, at den altid vil returnere et promise. Når man så inde i denne metode bruger ordet await, så kigger Javascript efter om denne promise indfries.</p>
+
+
+<div class="code-block">
+  <div class="code-title">Eksempel på Async/await</div>
+  <div class="code-text">
+    async function main() {
+      try {
+        const myPromiseResult = await myPromise();
+        console.log("In main:" + myPromiseResult);
+        return myPromiseResult;
+      } catch (error) {
+        console.log(error);
+      } 
+    }    
+  </div>
+</div>
+
+
+
+
+<div class="code-block">
+  <div class="code-title">Eksempel på fejl</div>
+  <div class="code-text"></div>
+</div>
+
+
+
+<div class="quote-block">
+  <div class="quote-text">Lorem ipsum</div>
+  <div class="quote-source">Source: www.wikipedia.com</div>
+</div>
+
+
