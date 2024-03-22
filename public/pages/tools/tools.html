@@ -1,1 +1,42 @@
 <h1>Tools</h1>
+<p>I løbet af dette semester har vi arbejdet med flere forskellige udviklingsværktøjer. Jeg har samlet en række af dem her og beskrevet dem.</p>
+
+<h2>Git og Github</h2>
+<p>Git er et versionering system, som vi bruger til at spore og håndtere ændringer i vores kode. Det gør det nemt for forskellige udviklere at arbejde sammen.</p>
+<p>Github er en web service som vi bruger til at hoste vores git filer og kode på. Udover at være et form for lager, så er der også en række værktøjer, som vi gør brug af. Fx pull request, code review, issue tracking og mange flere.</p>
+<p>Når vi har skrevet noget kode i en mappe, og vi gerne vil dele det via git og github, så kan vi gøre nedenstående:</p>
+
+
+
+<div class="code-block">
+  <div class="code-title">Eksempel på brug af git</div>
+  <div class="code-text">
+// Initialisering af git i en mappe når der allerede er et repository i github
+echo "# mandatory-1" >> README.md
+
+git init
+
+git add README.md // Tilføjer kun denne fil
+// git add -A // Tilføjer alt i forskellige mapper
+
+git commit -m "first commit"
+
+git branch -M main
+
+git remote add origin https://github.com/steffengroenandersen/mandatory-1.git
+
+git push -u origin main
+  </div>
+</div>
+
+<h2>Nodemon</h2>
+<p>Nodemon er et værktøj som vi bruger i forbindelse med udviklingen af vores program. I stedet for at skrive “node app.js” for at starte programmet op efter ændringer, så kan vi skrive “nodemon app.js” og derefter genstarter applikationen selv når der sker ændringer i visse fil typer.</p>
+
+
+<div class="quote-block">
+  <div class="quote-text">nodemon is a tool that helps develop Node.js based applications by automatically restarting the node application when file changes in the directory are detected.
+
+    nodemon does not require any additional changes to your code or method of development. nodemon is a replacement wrapper for node. To use nodemon, replace the word node on the command line when executing your script.
+    </div>
+  <div class="quote-source">Source: https://nodemon.io/</div>
+</div>
